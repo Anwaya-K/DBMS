@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forensic Database Management System</title>
+</head>
+<body>
+    <h1>Welcome to the Forensic Database Management System</h1>
+    
+    <h2>Cases</h2>
+    <ul id="case-list">
+        <!-- Cases will be populated dynamically here -->
+    </ul>
+    
+    <script>
+        fetch('/get_cases')
+            .then(response => response.json())
+            .then(data => {
+                const caseList = document.getElementById('case-list');
+                data.forEach(caseData => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${caseData.case_name} - ${caseData.case_date}`;
+                    caseList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
